@@ -52,7 +52,7 @@ public class ServicioPeliculasArchivo implements IServicioPeliculas{
   }
 
   @Override
-  public Pelicula agregarPelicula(Pelicula pelicula) {
+  public boolean agregarPelicula(Pelicula pelicula) {
     boolean anexar = false;
     var archivo = new File(NOMBRE_ARCHIVO);
     try{
@@ -62,9 +62,9 @@ public class ServicioPeliculasArchivo implements IServicioPeliculas{
       // Agregamos la pelicula (toString)
       salida.println(pelicula);
       salida.close();
-      return pelicula;
+      return true;
     } catch(Exception e){
-      return null;
+      return false;
     }
   }
 
