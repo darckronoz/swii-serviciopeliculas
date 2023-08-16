@@ -8,5 +8,5 @@ public interface IServicioPeliculas {
 
   public void agregarPelicula(Pelicula pelicula);
 
-  public void buscarPelicula(Pelicula pelicula);
+  public boolean buscarPelicula(Pelicula pelicula);
 }
