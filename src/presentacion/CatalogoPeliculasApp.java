@@ -45,8 +45,8 @@ public class CatalogoPeliculasApp {
       case 1 -> {
         System.out.println("Introduce el nombre de la pelicula: ");
         var nombrePelicula = consola.nextLine();
-        boolean agregar = servicioPeliculas.agregarPelicula(new Pelicula(nombrePelicula));
-        
+        String agregar = (servicioPeliculas.agregarPelicula(new Pelicula(nombrePelicula)))?"Se agrego correctamene la pelicula":"La pelicula se agrego correctamente";
+        System.out.printl(agregar);
       }
       case 2 -> servicioPeliculas.listarPeliculas();
       case 3 -> {
