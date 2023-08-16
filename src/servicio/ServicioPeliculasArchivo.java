@@ -52,7 +52,7 @@ public class ServicioPeliculasArchivo implements IServicioPeliculas{
   }
 
   @Override
-  public void agregarPelicula(Pelicula pelicula) {
+  public Pelicula agregarPelicula(Pelicula pelicula) {
     boolean anexar = false;
     var archivo = new File(NOMBRE_ARCHIVO);
     try{
@@ -63,8 +63,10 @@ public class ServicioPeliculasArchivo implements IServicioPeliculas{
       salida.println(pelicula);
       salida.close();
       System.out.println("Se agrego al archivo la pelicula: " + pelicula.getNombre());
+      return pelicula;
     } catch(Exception e){
       System.out.println("Ocurrio un error al agregar pelicula: " + e.getMessage());
+      return null;
     }
   }
 
