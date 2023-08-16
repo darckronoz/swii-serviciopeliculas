@@ -45,7 +45,8 @@ public class CatalogoPeliculasApp {
       case 1 -> {
         System.out.println("Introduce el nombre de la pelicula: ");
         var nombrePelicula = consola.nextLine();
-        servicioPeliculas.agregarPelicula(new Pelicula(nombrePelicula));
+        boolean agregar = servicioPeliculas.agregarPelicula(new Pelicula(nombrePelicula));
+        
       }
       case 2 -> servicioPeliculas.listarPeliculas();
       case 3 -> {
