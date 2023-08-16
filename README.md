@@ -6,6 +6,5 @@
 
 Al hacer la implementación se dio correctamente.
 
-Refactoring del codigo:
 
 
