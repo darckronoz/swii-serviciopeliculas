@@ -26,13 +26,8 @@ public class ServicioPeliculasLista implements IServicioPeliculas{
   }
 
   @Override
-  public void buscarPelicula(Pelicula pelicula) {
-    // Regresa el indice de la pelicula encontrada en la lista
-    var indice = peliculas.indexOf(pelicula);
-    if(indice == -1)
-      System.out.println("No se encontro la pelicula: " + pelicula);
-    else
-      System.out.println("Pelicula encontrada en el indice: " + indice);
+  public int buscarPelicula(Pelicula pelicula) {
+    return peliculas.indexOf(pelicula);
   }
 
   public static void main(String[] args) {
