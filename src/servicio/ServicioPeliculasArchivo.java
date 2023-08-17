@@ -55,7 +55,7 @@ public class ServicioPeliculasArchivo implements IServicioPeliculas{
       // Cerrar el archivo
       entrada.close();
     } catch (Exception e){
-      System.out.println("Ocurrio un error a leer el archivo: " + e.getMessage());
+      peliculas = null;
     }
     return peliculas;
   }
@@ -79,7 +79,7 @@ public class ServicioPeliculasArchivo implements IServicioPeliculas{
 
   @Override
   public int buscarPelicula(Pelicula pelicula) {
-    var archivo = new File(NOMBRE_ARCHIVO);
+    File archivo = new File(NOMBRE_ARCHIVO);
     try{
       // Abrimos el archivo para lectura linea a linea
       BufferedReader entrada = new BufferedReader(new FileReader(archivo));
