@@ -9,7 +9,7 @@ public class ServicioPeliculasArchivo implements IServicioPeliculas{
   private final String NOMBRE_ARCHIVO = "peliculas.txt";
 
   public ServicioPeliculasArchivo(){
-    var archivo = new File(NOMBRE_ARCHIVO);
+    File archivo = new File(NOMBRE_ARCHIVO);
     try{
       // Si ya existe el archivo, NO se vuelve a crear
       if(archivo.exists()){
@@ -17,7 +17,7 @@ public class ServicioPeliculasArchivo implements IServicioPeliculas{
       }
       else{
         // Si no existe, se crea vacio
-        var salida = new PrintWriter(new FileWriter(archivo));
+        PrintWriter salida = new PrintWriter(new FileWriter(archivo));
         salida.close();
         System.out.println("Se ha creado el archivo");
       }
