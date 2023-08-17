@@ -38,10 +38,18 @@ public class VistaPeliculas {
         System.out.println("La acción se realizó correctamente: " + action);
     }
 
-    public void showMovies(List<Object> lista) {
+    public void showMovies(List<?> lista) {
         for (Object movie : lista) {
             System.out.println(movie.toString());
         }
+    }
+
+    public void showMoviePosition(int index) {
+        System.out.println("Pelicula encontrada en posición: " + index);
+    }
+
+    public void showBye() {
+        System.out.println("good bye :D");
     }
 }
 

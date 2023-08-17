@@ -3,20 +3,15 @@ package presentacion;
 import dominio.Pelicula;
 import servicio.IServicioPeliculas;
 import servicio.ServicioPeliculasArchivo;
-import servicio.ServicioPeliculasLista;
 import vista.VistaPeliculas;
-
-import java.util.Scanner;
+import java.util.List;
 
 public class Controller {
   
-  private IServicioPeliculas servicioPeliculasLista;
   private IServicioPeliculas servicioPeliculasArchivo;
   private VistaPeliculas vista;
-  private boolean salir;
 
   public Controller() {
-    this.servicioPeliculasLista = new ServicioPeliculasLista();
     this.servicioPeliculasArchivo = new ServicioPeliculasArchivo();
     this.vista = new VistaPeliculas();
   }
@@ -31,6 +26,8 @@ public class Controller {
           vista.showError(e.getMessage());
         }
     }
+    vista.showBye();
+    System.exit(0);
   }
 
   private void executeOption(int option) {
@@ -44,43 +41,51 @@ public class Controller {
       case 3:
       findMovie();
       break;
+      default:
+      vista.showError("opcion no encontrada");
+      break;
     }
   }
 
   private void findMovie() {
-
+    try {
+      int position = servicioPeliculasArchivo.buscarPelicula(new Pelicula(vista.getMovieName()));
+      if(position >= 0) {
+        vista.showMoviePosition(position);
+      }else {
+        vista.showError("pelicula no encontrada."); 
+      }
+    } catch (Exception e) {
+      vista.showError(e.getMessage());
+    }
   }
 
   private void listMovies() {
+    try {
+      List<Pelicula> lista = servicioPeliculasArchivo.listarPeliculas();
+      if(lista == null) {
+        vista.showError("Error al abrir el archivo");
+      }
+      if(lista.size() > 0){
+        vista.showMovies(lista);
+      }else {
+        vista.showError("Lista vacía");
+      }
+    } catch (Exception e) {
+      vista.showError(e.getMessage());
+    }
   }
 
   private void addMovie() {
     Pelicula pelicula = new Pelicula(vista.getMovieName());
-  }
-
-  private static boolean ejecutarOpciones(Scanner consola,
-                                          IServicioPeliculas servicioPeliculas){
-    var opcion = Integer.parseInt(consola.nextLine());
-    var salir = false;
-    switch (opcion){
-      case 1 -> {
-        System.out.println("Introduce el nombre de la pelicula: ");
-        var nombrePelicula = consola.nextLine();
-        String agregar = (servicioPeliculas.agregarPelicula(new Pelicula(nombrePelicula)))?"Se agrego correctamene la pelicula":"La pelicula se agrego correctamente";
-        System.out.printl(agregar);
+    try {
+      if(servicioPeliculasArchivo.agregarPelicula(pelicula)) {
+          vista.showSuccesfull("agregar pelicula");
+      }else {
+        vista.showError("error al agregar prelicula");
       }
-      case 2 -> servicioPeliculas.listarPeliculas();
-      case 3 -> {
-        System.out.println("Introduce la pelicula a buscar: ");
-        var buscar = consola.nextLine();
-        servicioPeliculas.buscarPelicula(new Pelicula(buscar));
-      }
-      case 4 -> {
-        System.out.println("Hasta pronto!");
-        salir = true;
-      }
-      default -> System.out.println("Opcion no reconocida: " + opcion);
+    } catch (Exception e) {
+      vista.showError(e.getMessage());
     }
-    return salir;
   }
 }
