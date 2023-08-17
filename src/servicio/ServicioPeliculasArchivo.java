@@ -85,8 +85,8 @@ public class ServicioPeliculasArchivo implements IServicioPeliculas{
       BufferedReader entrada = new BufferedReader(new FileReader(archivo));
       String lineaTexto;
       lineaTexto = entrada.readLine();
-      int indice = 1;
-      var peliculaBuscar = pelicula.getNombre();
+      int index = 1;
+      String peliculaBuscar = pelicula.getNombre();
       while(lineaTexto != null){
         // Buscamos sin importar mayusculas/minusculas
         if(peliculaBuscar != null && peliculaBuscar.equalsIgnoreCase(lineaTexto)){
@@ -95,13 +95,11 @@ public class ServicioPeliculasArchivo implements IServicioPeliculas{
         }
         // Leemos la siguiente linea antes de la siguiente iteracion
         lineaTexto = entrada.readLine();
-        indice++;
+        index++;
       }
-      return indice;
+      return index;
     } catch(Exception e){
-      System.out.println("Ocurrio un error al buscar en el archivo: "
-              + e.getMessage());
-              return -1;
+      return -1;
     }
   }
 }
