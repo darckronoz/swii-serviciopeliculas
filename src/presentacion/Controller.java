@@ -58,6 +58,7 @@ public class Controller {
     } catch (Exception e) {
       vista.showError(e.getMessage());
     }
+    init();
   }
 
   private void listMovies() {
@@ -74,6 +75,7 @@ public class Controller {
     } catch (Exception e) {
       vista.showError(e.getMessage());
     }
+    init();
   }
 
   private void addMovie() {
@@ -87,5 +89,6 @@ public class Controller {
     } catch (Exception e) {
       vista.showError(e.getMessage());
     }
+    init();
   }
 }

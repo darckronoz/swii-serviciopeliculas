@@ -39,7 +39,6 @@ public class ServicioPeliculasArchivo implements IServicioPeliculas{
     // volvemos a abrir el archivo
     File archivo = new File(NOMBRE_ARCHIVO);
     try{
-      System.out.println("Listado de Peliculas");
       // Abrimos el archivo para lectura
       var entrada = new BufferedReader(new FileReader(archivo));
       // Leemos linea a linea el archivo
