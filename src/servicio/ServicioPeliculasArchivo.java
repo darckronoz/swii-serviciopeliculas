@@ -3,33 +3,41 @@ package servicio;
 import dominio.Pelicula;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServicioPeliculasArchivo implements IServicioPeliculas{
 
   private final String NOMBRE_ARCHIVO = "peliculas.txt";
 
   public ServicioPeliculasArchivo(){
+    creaciónArchivo();
+  }
+
+  
+  public String creaciónArchivo(){
     File archivo = new File(NOMBRE_ARCHIVO);
     try{
       // Si ya existe el archivo, NO se vuelve a crear
       if(archivo.exists()){
-        System.out.println("El archivo ya existe!");
+        return "El archivo ya existe!";
       }
       else{
         // Si no existe, se crea vacio
         PrintWriter salida = new PrintWriter(new FileWriter(archivo));
         salida.close();
-        System.out.println("Se ha creado el archivo");
+        return "Se ha creado el archivo";
       }
     } catch(Exception e){
-      System.out.println("Ocurrio un error al abrir archivo: " + e.getMessage());
+      return ("Ocurrio un error al abrir archivo: " + e.getMessage());
     }
   }
 
   @Override
-  public void listarPeliculas() {
+  public List<Pelicula> listarPeliculas() {
+    List<Pelicula> peliculas = new ArrayList<>();
     // volvemos a abrir el archivo
-    var archivo = new File(NOMBRE_ARCHIVO);
+    File archivo = new File(NOMBRE_ARCHIVO);
     try{
       System.out.println("Listado de Peliculas");
       // Abrimos el archivo para lectura
@@ -40,7 +48,7 @@ public class ServicioPeliculasArchivo implements IServicioPeliculas{
       //Leemos todas las lineas
       while(linea != null){
         var pelicula = new Pelicula(linea);
-        System.out.println(pelicula);
+        peliculas.add(pelicula);
         // Antes de terminar el ciclo volvemos a leer la siguiente linea
         linea = entrada.readLine();
       }
@@ -49,6 +57,7 @@ public class ServicioPeliculasArchivo implements IServicioPeliculas{
     } catch (Exception e){
       System.out.println("Ocurrio un error a leer el archivo: " + e.getMessage());
     }
+    return peliculas;
   }
 
   @Override
