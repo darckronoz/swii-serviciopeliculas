@@ -1,7 +1,6 @@
 package servicio;
 
-import dominio.Pelicula;
-
+import dominio.Movie;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +10,11 @@ public class ServicioPeliculasArchivo implements IServicioPeliculas{
   private final String NOMBRE_ARCHIVO = "peliculas.txt";
 
   public ServicioPeliculasArchivo(){
-    creaciónArchivo();
+    creationFile();
   }
 
   
-  public String creaciónArchivo(){
+  public String creationFile(){
     File archivo = new File(NOMBRE_ARCHIVO);
     try{
       // Si ya existe el archivo, NO se vuelve a crear
@@ -34,8 +33,8 @@ public class ServicioPeliculasArchivo implements IServicioPeliculas{
   }
 
   @Override
-  public List<Pelicula> listarPeliculas() {
-    List<Pelicula> peliculas = new ArrayList<>();
+  public List<Movie> listMovies() {
+    List<Movie> peliculas = new ArrayList<>();
     // volvemos a abrir el archivo
     File archivo = new File(NOMBRE_ARCHIVO);
     try{
@@ -46,7 +45,7 @@ public class ServicioPeliculasArchivo implements IServicioPeliculas{
       linea = entrada.readLine();
       //Leemos todas las lineas
       while(linea != null){
-        var pelicula = new Pelicula(linea);
+        var pelicula = new Movie(linea);
         peliculas.add(pelicula);
         // Antes de terminar el ciclo volvemos a leer la siguiente linea
         linea = entrada.readLine();
@@ -60,7 +59,7 @@ public class ServicioPeliculasArchivo implements IServicioPeliculas{
   }
 
   @Override
-  public boolean agregarPelicula(Pelicula pelicula) {
+  public boolean addMovie(Movie pelicula) {
     boolean anexar = false;
     var archivo = new File(NOMBRE_ARCHIVO);
     try{
@@ -77,7 +76,7 @@ public class ServicioPeliculasArchivo implements IServicioPeliculas{
   }
 
   @Override
-  public int buscarPelicula(Pelicula pelicula) {
+  public int searchMovie(Movie pelicula) {
     File archivo = new File(NOMBRE_ARCHIVO);
     try{
       // Abrimos el archivo para lectura linea a linea

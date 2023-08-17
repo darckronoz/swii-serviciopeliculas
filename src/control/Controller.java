@@ -1,6 +1,6 @@
 package control;
 
-import dominio.Pelicula;
+import dominio.Movie;
 import servicio.IServicioPeliculas;
 import servicio.ServicioPeliculasArchivo;
 import vista.VistaPeliculas;
@@ -49,7 +49,7 @@ public class Controller {
 
   private void findMovie() {
     try {
-      int position = servicioPeliculasArchivo.buscarPelicula(new Pelicula(vista.getMovieName()));
+      int position = servicioPeliculasArchivo.searchMovie(new Movie(vista.getMovieName()));
       if(position >= 0) {
         vista.showMoviePosition(position);
       }else {
@@ -63,7 +63,7 @@ public class Controller {
 
   private void listMovies() {
     try {
-      List<Pelicula> lista = servicioPeliculasArchivo.listarPeliculas();
+      List<Movie> lista = servicioPeliculasArchivo.listMovies();
       if(lista == null) {
         vista.showError("Error al abrir el archivo");
       }
@@ -79,9 +79,9 @@ public class Controller {
   }
 
   private void addMovie() {
-    Pelicula pelicula = new Pelicula(vista.getMovieName());
+    Movie pelicula = new Movie(vista.getMovieName());
     try {
-      if(servicioPeliculasArchivo.agregarPelicula(pelicula)) {
+      if(servicioPeliculasArchivo.addMovie(pelicula)) {
           vista.showSuccesfull("agregar pelicula");
       }else {
         vista.showError("error al agregar prelicula");

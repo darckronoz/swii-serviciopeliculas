@@ -1,13 +1,13 @@
 package servicio;
 
-import dominio.Pelicula;
+import dominio.Movie;
 import java.util.List;
 
 public interface IServicioPeliculas {
 
-  public List<Pelicula> listarPeliculas();
+  public List<Movie> listMovies();
 
-  public boolean agregarPelicula(Pelicula pelicula);
+  public boolean addMovie(Movie movie);
 
-  public int buscarPelicula(Pelicula pelicula);
+  public int searchMovie(Movie movie);
 }
