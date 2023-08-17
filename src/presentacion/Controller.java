@@ -3,38 +3,59 @@ package presentacion;
 import dominio.Pelicula;
 import servicio.IServicioPeliculas;
 import servicio.ServicioPeliculasArchivo;
-//import servicio.ServicioPeliculasLista;
+import servicio.ServicioPeliculasLista;
+import vista.VistaPeliculas;
 
 import java.util.Scanner;
 
-public class CatalogoPeliculasApp {
+public class Controller {
+  
+  private IServicioPeliculas servicioPeliculasLista;
+  private IServicioPeliculas servicioPeliculasArchivo;
+  private VistaPeliculas vista;
+  private boolean salir;
 
-  public static void main(String[] args) {
-    var salir = false;
-    var consola = new Scanner(System.in);
-    // Agregamos la implementacion del servicio
-    //IServicioPeliculas servicioPeliculas = new ServicioPeliculasLista();
-    IServicioPeliculas servicioPeliculas = new ServicioPeliculasArchivo();
-    while(!salir){
-      try{
-        mostrarMenu();
-        salir = ejecutarOpciones(consola, servicioPeliculas);
-      } catch(Exception e){
-        System.out.println("Ocurrio un error: " + e.getMessage());
-      }
-      System.out.println();
-    }// fin while
+  public Controller() {
+    this.servicioPeliculasLista = new ServicioPeliculasLista();
+    this.servicioPeliculasArchivo = new ServicioPeliculasArchivo();
+    this.vista = new VistaPeliculas();
   }
 
-  private static void mostrarMenu(){
-    System.out.print("""
-            *** Catalogo de Peliculas ***
-            1. Agregar pelicula
-            2. Listar peliculas
-            3. Buscar pelicula
-            4. Salir
-            Elige una opcion:
-            """);
+  public void init() {
+    vista.showMenu();
+    int selectOption = vista.selectOption();
+    while(selectOption != 4){
+        try{
+          executeOption(selectOption);
+        } catch(Exception e){
+          vista.showError(e.getMessage());
+        }
+    }
+  }
+
+  private void executeOption(int option) {
+    switch(option) {
+      case 1:
+      addMovie();
+      break;
+      case 2:
+      listMovies();
+      break;
+      case 3:
+      findMovie();
+      break;
+    }
+  }
+
+  private void findMovie() {
+
+  }
+
+  private void listMovies() {
+  }
+
+  private void addMovie() {
+    Pelicula pelicula = new Pelicula(vista.getMovieName());
   }
 
   private static boolean ejecutarOpciones(Scanner consola,
