@@ -43,6 +43,7 @@ public class Controller {
       break;
       default:
       vista.showError("opcion no encontrada");
+      init();
       break;
     }
   }
