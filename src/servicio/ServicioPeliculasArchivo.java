@@ -90,13 +90,14 @@ public class ServicioPeliculasArchivo implements IServicioPeliculas{
         // Buscamos sin importar mayusculas/minusculas
         if(peliculaBuscar != null && peliculaBuscar.equalsIgnoreCase(lineaTexto)){
           entrada.close();
-          break;
+          return index;
         }
         // Leemos la siguiente linea antes de la siguiente iteracion
         lineaTexto = entrada.readLine();
         index++;
       }
-      return index;
+      entrada.close();
+      return -1;
     } catch(Exception e){
       return -1;
     }
